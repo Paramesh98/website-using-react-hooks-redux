@@ -8,7 +8,7 @@ import {
   Row,
   Jumbotron,
   ButtonGroup,
-  Modal
+  Modal,
 } from "react-bootstrap";
 import { connect, useSelector, useDispatch } from "react-redux";
 import { search, quantity as one, submit, deleteItem } from "../store/Actions";
@@ -27,7 +27,7 @@ function Data() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
   //const userValue = useSelector(state => state.userValue);
   const dispatch = useDispatch();
 
@@ -35,15 +35,15 @@ function Data() {
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentPost = user.slice(indexOfFirstPost, indexOfLastPost);
 
-  const paginate = number => {
+  const paginate = (number) => {
     setCurrentPage(currentPage + number);
   };
-  const handleEdit = id => {
+  const handleEdit = (id) => {
     //console.log("edit", id);
     setEdit(true);
     setId(id);
-    const item = user.filter(item => item.id == id);
-    item.map(item => {
+    const item = user.filter((item) => item.id == id);
+    item.map((item) => {
       return (
         setName(item.customer_name),
         setEmail(item.customer_email),
@@ -59,28 +59,31 @@ function Data() {
       customer_name: name,
       customer_email: email,
       product: product,
-      quantity: quantity
+      quantity: quantity,
     };
-    setName(""), setEmail(""), setProduct(""), setQuantity("");
+    setName("");
+    setEmail("");
+    setProduct("");
+    setQuantity("");
     setShow(true);
     setEdit(false);
     dispatch(submit(newItem));
   };
-  const handleDelete = id => {
+  const handleDelete = (id) => {
     //console.log("deleter", id);
     dispatch(deleteItem(id));
   };
 
-  const handleName = e => {
+  const handleName = (e) => {
     setName(e.target.value);
   };
-  const handleEmail = e => {
+  const handleEmail = (e) => {
     setEmail(e.target.value);
   };
-  const handleProduct = e => {
+  const handleProduct = (e) => {
     setProduct(e.target.value);
   };
-  const handleQuantity = e => {
+  const handleQuantity = (e) => {
     setQuantity(e.target.value);
   };
   return (
@@ -100,7 +103,10 @@ function Data() {
       </Row>
       <Row className="form-group">
         <Col md="6" className="form-group">
-          <select className="form-control" onChange={e => dispatch(search(e))}>
+          <select
+            className="form-control"
+            onChange={(e) => dispatch(search(e))}
+          >
             <option value="">Choose Product</option>
             <option value="Product 1">Product 1</option>
             <option value="Product 2">Product 2</option>
@@ -108,7 +114,7 @@ function Data() {
           </select>
         </Col>
         <Col md="6" className="form-group">
-          <select className="form-control" onChange={e => dispatch(one(e))}>
+          <select className="form-control" onChange={(e) => dispatch(one(e))}>
             <option value="">Choose Quantity</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -134,7 +140,7 @@ function Data() {
           </Col>
           <Col md="2">
             <Form.Control
-              onChange={e => handleName(e)}
+              onChange={(e) => handleName(e)}
               name="name"
               value={name}
               type="text"
@@ -144,7 +150,7 @@ function Data() {
           </Col>
           <Col md="2">
             <Form.Control
-              onChange={e => handleEmail(e)}
+              onChange={(e) => handleEmail(e)}
               name="email"
               value={email}
               type="text"
@@ -154,7 +160,7 @@ function Data() {
           </Col>
           <Col md="2">
             <Form.Control
-              onChange={e => handleProduct(e)}
+              onChange={(e) => handleProduct(e)}
               value={product}
               name="product"
               type="text"
@@ -164,7 +170,7 @@ function Data() {
           </Col>
           <Col md="2">
             <Form.Control
-              onChange={e => handleQuantity(e)}
+              onChange={(e) => handleQuantity(e)}
               value={quantity}
               name="quantity"
               type="text"
@@ -185,7 +191,7 @@ function Data() {
       )}
 
       <CardGroup>
-        {currentPost.map(item => {
+        {currentPost.map((item) => {
           return (
             <Col md={3} className="form-group">
               <Card style={{ width: "auto" }}>
@@ -232,7 +238,6 @@ function Data() {
           Next
         </Button>
         <Button variant="primary">
-          {" "}
           {currentPage} of {Math.ceil(user.length / postPerPage)}
         </Button>
       </ButtonGroup>
