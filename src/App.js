@@ -14,20 +14,20 @@ function App() {
     return dispatch(fetchUsers());
   }, []);
 
-  handleLogin = () => {
+  const handleLogin = () => {
     setLogin(false);
     setMsg("Login to view Dashboard");
   };
-  handleLogout = () => {
+  const handleLogout = () => {
     setLogin(true);
     setMsg("See you soon !");
   };
   return (
     <div className="App form-group">
       {login ? (
-        <Login msg={msg} handleLogin={this.handleLogin} />
+        <Login msg={msg} handleLogin={handleLogin} />
       ) : (
-        <Home handleLogout={this.handleLogout} />
+        <Home handleLogout={handleLogout} />
       )}
     </div>
   );
